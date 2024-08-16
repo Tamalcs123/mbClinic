@@ -53,7 +53,7 @@ const updateDoctorInfo = async (req, res) => {
 const getAllDoctorAppointments = async (req, res) => {
   try {
     const doctor = await Doctor.findOne({ userId: req.body.userId });
-    const appointments = await Appointment.find({ doctorId: doctor._id });
+    const appointments = await Appointment.find({ doctorId: doctor?._id });
     if (!appointments) {
       res
         .status(200)

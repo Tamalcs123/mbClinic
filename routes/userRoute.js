@@ -67,4 +67,11 @@ router.get(
   userController.getAllUserAppointments
 );
 
+// get all user appointments admin
+router.get(
+  "/get-appointments-admin",
+  // authMiddleware,
+  userController.getAllUserAppointmentsAdmin
+);
+
 module.exports = router;

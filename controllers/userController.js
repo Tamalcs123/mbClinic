@@ -57,7 +57,7 @@ const login = async (req, res) => {
     });
     res
       .status(200)
-      .json({ message: "Successfully Logged In", success: true, data: token });
+      .json({ message: "Successfully Logged In", success: true, data: token,myuser:user });
   } catch (error) {
     console.error(error);
     return res
@@ -274,6 +274,27 @@ const getAllUserAppointments = async (req, res) => {
   }
 };
 
+const getAllUserAppointmentsAdmin = async (req, res) => {
+  try {
+    const appointments = await Appointment.find();
+    if (!appointments) {
+      res
+        .status(200)
+        .json({ mesage: "Not appointments found", success: false });
+    }
+    res.status(200).json({
+      message: "Apointments fetched Successfully",
+      success: true,
+      data: appointments,
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Error fetching appointments", success: false });
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -284,5 +305,6 @@ module.exports = {
   getAllApprovedDoctors,
   bookAppointment,
   bookAppointmentAvailability,
-  getAllUserAppointments
+  getAllUserAppointments,
+  getAllUserAppointmentsAdmin
 };
